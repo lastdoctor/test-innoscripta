@@ -1,0 +1,3 @@
+exports.prodConfig = {
+  // Production config
+};
