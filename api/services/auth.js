@@ -10,7 +10,7 @@ async function login(data) {
     const user = await User.findOne({ email });
     if (!user) throw new Error('Email is not correct');
     const isSamePassword = bcrypt.compareSync(password, user.password);
-    if (isSamePassword) throw new Error('Password is not correct');
+    if (!isSamePassword) throw new Error('Password is not correct');
     return user;
   } catch (e) {
     throw e;

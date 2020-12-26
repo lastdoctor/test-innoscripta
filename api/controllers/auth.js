@@ -3,12 +3,12 @@ const userService = require('@/services/user');
 
 async function signUp(req, res) {
   try {
-    const userDb = await userService.createUser(req.body);
-    const currentUser = await authService.createToken(userDb);
+    const user = await userService.createUser(req.body);
+    const tokens = await authService.createToken(user);
     res.status(201).json({
       success: true,
       message: 'User is created',
-      currentUser,
+      tokens,
     });
   } catch (e) {
     res.status(400).json({
@@ -19,14 +19,13 @@ async function signUp(req, res) {
 };
 
 async function signIn(req, res) {
-  console.log(req);
   try {
-    const userDb = await authService.login(req.body);
-    const currentUser = await authService.createToken(userDb);
+    const user = await authService.login(req.body);
+    const tokens = await authService.createToken(user);
     res.status(200).json({
       success: true,
       message: 'User is signed in',
-      currentUser,
+      tokens,
     });
   } catch (e) {
     res.status(404).json({

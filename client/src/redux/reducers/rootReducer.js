@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
-
-const test = 'test';
+import { pizzaReducer } from './pizzaReducer';
+import { authReducer } from './authReducer';
+import { cardReducer } from './cardReducer';
+import { currencyReducer } from './currencyReducer';
 
 export const rootReducer = combineReducers({
-  test,
+  products: pizzaReducer,
+  tokens: authReducer,
+  card: cardReducer,
+  currency: currencyReducer,
 });
