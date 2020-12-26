@@ -6,17 +6,9 @@ import { Spinner } from '@components/Spinner';
 import { addPizzaOrder } from '@redux/actionCreators/pizzaAC';
 import { fetchExchangeAC } from '@redux/actionCreators/currensyAC';
 
-export function Home(props) {
+export function Home() {
   const dispatch = useDispatch();
   const { products } = useSelector(store => store);
-
-  if (!localStorage.getItem('pizza')) {
-    localStorage.setItem('pizza', JSON.stringify({
-      order: [],
-      currency: 'USD',
-    }));
-  }
-
 
   useEffect(() => {
     dispatch(fetchPizzaAC());

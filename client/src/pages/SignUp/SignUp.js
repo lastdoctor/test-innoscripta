@@ -7,8 +7,6 @@ export function SignUp() {
   const dispatch = useDispatch();
   const { tokens } = useSelector(store => store);
 
-  useEffect(() => localStorage.setItem('auth', JSON.stringify(tokens)), [dispatch]);
-
   const validatePassword = (password, confirmPassword) => {
     if (password.value !== confirmPassword.value) {
       confirmPassword.setCustomValidity(`Passwords Don't Match`);
@@ -18,6 +16,7 @@ export function SignUp() {
       return true;
     }
   };
+
   const formHandler = (event) => {
     event.preventDefault();
     const { firstName, lastName, email, password, confirmPassword } = event.target;
@@ -32,9 +31,9 @@ export function SignUp() {
       dispatch(fetchSignUpAC(user));
     }
   };
+
   return (
     <>
-      {localStorage.setItem('auth', JSON.stringify(tokens))}
       {tokens.success ? <Redirect to='/' /> : null}
       <div className='card'>
         <div className='card-body'>

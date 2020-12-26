@@ -4,27 +4,17 @@ import { addPizzaOrder } from '@redux/actionCreators/pizzaAC';
 
 export function Card({ title, description, img, priceUsd, id }) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(priceUsd);
   const { euro } = useSelector(store => store.currency);
-  let pizza = JSON.parse(localStorage.getItem('pizza'));
 
   function clickHandler() {
-    setQuantity(quantity + 1);
     const newPizza = {
       id,
       title,
       price: price,
-      quantity,
+      // quantity,
     };
-    const isExist = pizza.order.findIndex(el => el.id === id);
-    if (isExist === -1) {
-      pizza.order.push(newPizza);
-    } else {
-      pizza.order.splice(isExist, 1, newPizza);
-    }
-    dispatch(addPizzaOrder(pizza));
-    localStorage.setItem('pizza', JSON.stringify(pizza));
+    dispatch(addPizzaOrder());
   }
 
   return (

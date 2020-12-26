@@ -1,5 +1,5 @@
 import axios from '@axios';
-import { GET_ALL_PIZZAS, ADD_PIZZA_ORDER } from '../actionTypes/types';
+import { GET_ALL_PIZZAS, ADD_PIZZA_ORDER, CHANGE_CURRENCY } from '../actionTypes/types';
 
 export const fetchPizzaAC = () => {
   return (dispatch) => {
@@ -16,5 +16,10 @@ export const addFetchPizzaAC = (payload) => ({
 
 export const addPizzaOrder = (payload) => ({
   type: ADD_PIZZA_ORDER,
+  payload,
+});
+
+export const ChangeCurrency = (payload) => ({
+  type: CHANGE_CURRENCY,
   payload,
 });

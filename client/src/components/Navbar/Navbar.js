@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangeCurrency } from '@redux/actionCreators/pizzaAC';
 
 export function Navbar(props) {
-  const [currency, setCurrency] = useState('USD');
-  const tokens = JSON.parse(localStorage.getItem('auth'));
-  const pizza = JSON.parse(localStorage.getItem('pizza'));
-  const { pizzas } = useSelector(store => store.card);
+  const dispatch = useDispatch;
+  const { pizzas, tokens } = useSelector(store => store);
   const quantity = pizzas ? pizzas.order.reduce((accum, el) => accum + el.quantity, 0) : [];
 
   const ClickHandler = (event) => {
-    const selectedCurrency = event.target.textContent;
-    pizza.currency = selectedCurrency;
-    localStorage.setItem('pizza', JSON.stringify(pizza));
-    setCurrency(selectedCurrency);
+    const selectedCurrency = event.target.textContent.toString()
+    dispatch(ChangeCurrency(selectedCurrency));
   };
 
   return (
@@ -38,12 +35,12 @@ export function Navbar(props) {
             <div className='btn-group'>
               <button type='button' className='btn btn-warning dropdown-toggle' data-bs-toggle='dropdown'
                       aria-expanded='false'>
-                {currency === 'USD' ? 'USD' : 'EURO'}
+                USD
               </button>
               <ul className='dropdown-menu'>
                 <li onClick={ClickHandler}>
                   <a className='dropdown-item'>
-                    {currency === 'USD' ? 'EURO' : 'USD'}
+                    EURO
                   </a>
                 </li>
               </ul>

@@ -19,7 +19,6 @@ export function SignIn() {
 
   return (
     <>
-      {localStorage.setItem('auth', JSON.stringify(tokens))}
       {tokens.success ? <Redirect to='/' /> : null}
       <div className='card'>
         <div className='card-body'>
